@@ -1,0 +1,33 @@
+spring:
+  profiles:
+    active: dev
+
+
+
+mybatis-plus:
+  type-aliases-package: com.lhf.sysfvscommon.*.**
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: mapper/*.xml
+feign:
+  httpclient:
+    connection-timeout: 30000
+    time-to-live: 10000
+  compression:
+    response:
+      enabled: true
+    request:
+      enabled: true
+#hystrix:
+#  command:
+#    default:
+#      execution:
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 300000
+#      circuitBreaker:
+#        sleepWindowInMilliseconds: 300000
+#        forceClosed: true
+
+
+

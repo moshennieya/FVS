@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "server.cache.redis.key-prefix",
+      "type": "java.lang.String",
+      "description": "Description for server.cache.redis.key-prefix."
+    },
+    {
+      "name": "server.datasource.druid.db-type",
+      "type": "java.lang.String",
+      "description": "Description for server.datasource.druid.db-type."
+    }
+  ] }

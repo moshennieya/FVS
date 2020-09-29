@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lhf.sysuserservice.dao.SysUserDao">
+
+    <!--    查询用户所有信息，包括用户角色权限等信息-->
+    <resultMap id="queryAnyByUserIdMap" type="com.lhf.sysfvscommon.dto.SysUserDTO" autoMapping="true">
+        <id column="user_id" property="userId"/>
+        <collection property="roles" ofType="com.lhf.sysfvscommon.dto.SysRoleDTO" autoMapping="true">
+            <id column="role_id" property="roleId"/>
+            <collection property="pers" ofType="com.lhf.sysfvscommon.dto.SysPerDTO" autoMapping="true">
+                <id column="per_id" property="perId"/>
+            </collection>
+        </collection>
+    </resultMap>
+    <select id="queryAnyByUserId" resultMap="queryAnyByUserIdMap">
+        select su.user_id,
+               username,
+               password,
+               real_name,
+               phone,
+               email,
+               head_img,
+               is_lock,
+               sr.role_id,
+               role_name,
+               role,
+               role_ico,
+               sp.per_id,
+               per,
+               menu_name,
+               menu_type,
+               menu_ico,
+               menu_sort,
+               parent_id
+        from sys_user su
+                 inner join sys_user_role sur on su.user_id = sur.user_id
+                 inner join sys_role sr on sur.role_id = sr.role_id
+                 inner join sys_role_per srp on sr.role_id = srp.role_id
+                 inner join sys_per sp on srp.per_id = sp.per_id
+        where su.user_id = #{userId}
+
+    </select>
+</mapper>

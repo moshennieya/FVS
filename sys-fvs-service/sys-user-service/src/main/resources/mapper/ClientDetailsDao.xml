@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lhf.sysuserservice.dao.ClientDetailsDao">
+
+
+    <!--  添加  -->
+    <sql id="insert_columns">
+        <trim suffixOverrides=",">
+            client_id,
+            client_secret,
+            client_name,
+            <if test="secretRequired != null">
+                secret_required,
+            </if>
+            <if test="scoped != null">
+                scoped,
+            </if>
+            <if test="accessTokenValiditySeconds != null">
+                access_token_validity_seconds,
+            </if>
+            <if test="refreshTokenValiditySeconds != null">
+                refresh_token_validity_seconds,
+            </if>
+            <if test="autoApprove != null">
+                auto_approve,
+            </if>
+        </trim>
+    </sql>
+    <sql id="insert_property">
+        <trim suffixOverrides=",">
+            #{clientId},
+            #{clientSecret},
+            #{clientName},
+            <if test="secretRequired != null">
+                #{secretRequired},
+            </if>
+            <if test="scoped != null">
+                #{scoped},
+            </if>
+            <if test="accessTokenValiditySeconds != null">
+                #{accessTokenValiditySeconds},
+            </if>
+            <if test="refreshTokenValiditySeconds != null">
+                #{refreshTokenValiditySeconds},
+            </if>
+            <if test="autoApprove != null">
+                #{autoApprove},
+            </if>
+        </trim>
+    </sql>
+    <insert id="insert" parameterType="com.lhf.sysfvscommon.entity.ClientDetails">
+        insert into client_details(<include refid="insert_columns"/>)
+        VALUES (<include refid="insert_property"/>)
+    </insert>
+    <!--  修改  -->
+    <update id="update" parameterType="com.lhf.sysfvscommon.entity.ClientDetails">
+        update client_details
+        <set>
+            <if test="clientId != null">
+                client_id = #{client_id},
+            </if>
+            <if test="clientName != null and clientName != ''">
+                client_name = #{clientName}
+            </if>
+            <if test="clientSecret != null">
+                client_secret = #{client_secret},
+            </if>
+            <if test="secretRequired != null">
+                secret_required = #{secretRequired},
+            </if>
+            <if test="scoped != null">
+                scoped = #{scoped},
+            </if>
+            <if test="accessTokenValiditySeconds != null">
+                access_token_validity_seconds = #{accessTokenValiditySeconds},
+            </if>
+            <if test="refreshTokenValiditySeconds != null">
+                refresh_token_validity_seconds = #{refreshTokenValiditySeconds},
+            </if>
+            <if test="autoApprove != null">
+                auto_approve = #{autoApprove},
+            </if>
+        </set>
+        where client_id = #{clientId}
+    </update>
+    <!--  删除  -->
+    <delete id="delete">
+        delete
+        from client_details
+        where client_id = #{clientId}
+    </delete>
+    <!--  精准查找  -->
+    <resultMap id="queryByClientIdMap" type="com.lhf.sysfvscommon.dto.ClientDetailsDTO" autoMapping="true">
+        <id column="client_id" property="clientId"/>
+        <collection property="resources" ofType="com.lhf.sysfvscommon.dto.ResourceDetailsDTO" autoMapping="true">
+            <id column="resource_id" property="resourceId"/>
+        </collection>
+    </resultMap>
+    <select id="queryByClientId" resultMap="queryByClientIdMap">
+        select cd.client_id,
+               secret_required,
+               client_secret,
+               scoped,
+               cd.client_name,
+               access_token_validity_seconds,
+               auto_approve,
+               refresh_token_validity_seconds,
+               rd.resource_id,
+               rd.client_id,
+               rd.resource_name,
+               scope,
+               authorized_grant_type,
+               registered_redirect_uri,
+               authority
+        from client_details cd
+                 inner join resource_details rd on cd.client_id = rd.client_id
+        where cd.client_id = #{clientId}
+    </select>
+
+
+</mapper>

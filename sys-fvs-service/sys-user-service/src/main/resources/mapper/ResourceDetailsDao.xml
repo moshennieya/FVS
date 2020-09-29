@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lhf.sysuserservice.dao.ResourceDetailsDao">
+
+    <!--    批量添加-->
+    <insert id="insertAny">
+        insert into resource_details(resource_id, client_id, scope, authorized_grant_type,
+        registered_redirect_uri,authority,resource_name)
+        VALUES
+        <foreach collection="list" item="item" separator="),(" open="(" close=")">
+            #{item.resourceId}, #{item.clientId}, #{item.scope}, #{item.authorizedGrantType}, #{item.registeredRedirectUri},
+            #{item.authority},#{item.resourceName}
+        </foreach>
+
+
+    </insert>
+
+    <!--根据客户端id查询所有资源-->
+    <select id="queryByClientId" resultType="com.lhf.sysfvscommon.entity.ResourceDetails">
+
+        select rd.resource_id,
+               rd.resource_name,
+               client_id,
+               scope,
+               authorized_grant_type,
+               registered_redirect_uri,
+               authority
+        from resource_details rd
+        where client_id = #{clientId}
+
+    </select>
+</mapper>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FVS登录页面</title>
+    <style>
+        .header {
+            width: 99vw;
+            height: 10vh;
+        }
+
+        .footer {
+            width: 99vw;
+            height: 10vh;
+        }
+
+        .body {
+            width: 99vw;
+            height: 75vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .body > .form {
+            width: 26vw;
+            height: 14vw;
+            border: red 1px solid;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .body label {
+            display: inline-block;
+            width: 4.2vw;
+            height: 4vh;
+        }
+
+        input[type=submit] {
+            width: 100%;
+            height: 2.4em;
+        }
+
+        input{
+            display: inline-block;
+            /*width: 12em;*/
+            height: 2.2em;
+        }
+    </style>
+</head>
+<body>
+<div class="login">
+    <div class="header">
+
+
+    </div>
+    <div class="body">
+        <div class="form">
+            <form action="/auth/login" method="post">
+                <label>登录名:</label>
+                <input type="text" name="username">
+                <br/>
+                <label>密&emsp;码:</label>
+                <input type="password" name="password">
+                <br/>
+                <button type="submit">登&emsp;&emsp;&emsp;&emsp;&emsp;录</button>
+<!--                <input type="submit" value="登录"/>-->
+            </form>
+        </div>
+
+    </div>
+    <div class="footer">
+
+    </div>
+</div>
+
+</body>
+</html>

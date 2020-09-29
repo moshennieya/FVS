@@ -1,0 +1,11 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: sys-user-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.157.131:8848
+        group: SYSTEM
+        log-name: user.log

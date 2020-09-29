@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: sys-user-api
+
+  cloud:
+    nacos:
+      discovery:
+        log-name: user.log
+        server-addr: 192.168.157.131:8848
+        group: SYSTEM
+
+

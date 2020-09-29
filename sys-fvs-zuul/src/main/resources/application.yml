@@ -1,0 +1,24 @@
+server:
+  port: 1103
+
+zuul:
+#  add-host-header: true
+  sensitive-headers:  Access-Control-Allow-Origin
+  ignored-headers: Access-Control-Allow-Origin,H-APP-Id,Token,APPToken
+  host:
+    connect-timeout-millis: 3000
+    time-to-live: 30000
+    connection-request-timeout-millis: 50000
+    max-total-connections: 100
+    socket-timeout-millis: 50000
+  prefix: /api
+  routes:
+    oauth-authorize:
+      path: /auth/**
+      service-id: sys-fvs-auth
+    sys-user:
+      path: /user/**
+      service-id: sys-user-api
+
+
+

@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: sys-fvs-auth
+  # 注册到注册中心
+  cloud:
+    nacos:
+      discovery:
+        group: SYSTEM
+        server-addr: 192.168.157.131:8848

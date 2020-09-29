@@ -1,0 +1,57 @@
+server:
+  port: 8000
+
+spring:
+#  mysql
+  datasource:
+    druid:
+      db-type: mysql
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/fvs?serverTimezone=UTC
+      username: root
+      password: lhfadmin
+      async-init: true
+      enable: true
+      filter:
+        stat:
+          merge-sql: true
+          db-type: mysql
+          enabled: true
+          log-slow-sql: true
+          slow-sql-millis: 5000
+          connection-stack-trace-enable: true
+        slf4j:
+          enabled: true
+          connection-close-after-log-enabled: true
+          data-source-log-enabled: true
+
+      max-active: 5
+      max-create-task-count: 10
+      max-evictable-idle-time-millis: 30000
+      min-evictable-idle-time-millis: 30000
+      max-wait: 10000
+      min-idle: 0
+      max-wait-thread-count: 8
+      web-stat-filter:
+        enabled: true
+        session-stat-enable: true
+
+#        redis
+  redis:
+    jedis:
+      pool:
+        min-idle: 0
+        max-wait: 30000
+        max-idle: 5
+        max-active: 8
+    host: 192.168.157.131
+    password:
+    database: 0
+  cache:
+    redis:
+      key-prefix: user_
+      time-to-live: 180000
+      use-key-prefix: true
+logging:
+  level:
+    com.lhf.sysuserservice.dao: debug
