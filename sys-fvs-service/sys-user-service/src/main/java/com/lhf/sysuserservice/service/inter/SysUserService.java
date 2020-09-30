@@ -45,5 +45,13 @@ public interface SysUserService {
      * @param userId
      * @return
      */
-    List<SysUserDTO> queryAnyByUserId(Long userId);
+    SysUserDTO queryAnyByUserId(Long userId);
+
+    /**
+     * 通过用户名查询用户信息
+     *
+     * @param username
+     * @return
+     */
+    SysUserDTO queryByUsername(String username);
 }

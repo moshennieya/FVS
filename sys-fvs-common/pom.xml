@@ -35,6 +35,7 @@
             <artifactId>spring-security-crypto</artifactId>
             <version>5.2.5.RELEASE</version>
         </dependency>
+
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
             <artifactId>swagger-bootstrap-ui</artifactId>

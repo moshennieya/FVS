@@ -3,6 +3,7 @@ package com.lhf.sysuserservice.dao;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.lhf.sysfvscommon.dto.SysUserDTO;
 import com.lhf.sysfvscommon.entity.SysUser;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -18,7 +19,10 @@ public interface SysUserDao extends BaseMapper<SysUser> {
      * 包括角色信息权限信息
      *
      * @param userId
+     * @param username
      * @return
      */
-    List<SysUserDTO> queryAnyByUserId(Long userId);
+    SysUserDTO queryAnyByUserIdOrUsername(@Param("userId") Long userId, @Param("username") String username);
+
+
 }

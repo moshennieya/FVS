@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
@@ -32,6 +33,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Resource
     private PasswordEncoder passwordEncoder;
 
+    @Resource(name = "userDetailsServiceImpl")
+    private UserDetailsService userDetailsService;
+
     /**
      * 用户配置
      *
@@ -44,6 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .withUser("root").password(passwordEncoder.encode("123")).roles("ROOT")
                 .and()
                 .withUser("admin").password(passwordEncoder.encode("123")).roles("ADMIN");
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
     }
 
     /**
@@ -72,7 +77,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().anyRequest().authenticated()
                 .and()
                 .formLogin()
-//                .loginPage("/login.html")
+                .loginPage("/login.html")
                 .loginProcessingUrl("/login")
                 .permitAll()
                 .and()

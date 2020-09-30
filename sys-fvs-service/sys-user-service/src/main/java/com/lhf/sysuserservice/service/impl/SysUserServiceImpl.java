@@ -43,7 +43,12 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    public List<SysUserDTO> queryAnyByUserId(Long userId) {
-        return this.sysUserDao.queryAnyByUserId(userId);
+    public SysUserDTO  queryAnyByUserId(Long userId) {
+        return this.sysUserDao.queryAnyByUserIdOrUsername(userId, null);
+    }
+
+    @Override
+    public SysUserDTO queryByUsername(String username) {
+        return this.sysUserDao.queryAnyByUserIdOrUsername(null, username);
     }
 }

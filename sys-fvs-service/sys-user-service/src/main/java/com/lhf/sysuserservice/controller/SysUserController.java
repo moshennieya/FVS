@@ -58,11 +58,23 @@ public class SysUserController {
 
     /**
      * 查询用户
+     *
      * @param userId
      * @return
      */
     @GetMapping("queryAnyByUserId/{userId}")
-    public List<SysUserDTO> queryAnyByUserId(@PathVariable Long userId) {
+    public SysUserDTO queryAnyByUserId(@PathVariable Long userId) {
         return this.sysUserService.queryAnyByUserId(userId);
+    }
+
+    /**
+     * 查询用户
+     *
+     * @param username
+     * @return
+     */
+    @GetMapping("queryAnyByUsername/{username}")
+    public SysUserDTO queryAnyByUserId(@PathVariable String username) {
+        return this.sysUserService.queryByUsername(username);
     }
 }

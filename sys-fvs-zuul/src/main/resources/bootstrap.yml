@@ -9,3 +9,14 @@ spring:
         group: SYSTEM
         log-name: zuul.log
         enabled: true
+        heart-beat-interval: 5
+        heart-beat-timeout: 5000
+
+
+#      config:
+#        cluster-name: zuul-prop
+#        group: SYSTEM
+#        server-addr: 192.168.157.131:8848
+#        config-long-poll-timeout: 60000
+#        timeout: 5000
+

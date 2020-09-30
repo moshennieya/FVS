@@ -12,32 +12,41 @@
             </collection>
         </collection>
     </resultMap>
-    <select id="queryAnyByUserId" resultMap="queryAnyByUserIdMap">
+    <select id="queryAnyByUserIdOrUsername" resultMap="queryAnyByUserIdMap">
         select su.user_id,
-               username,
-               password,
-               real_name,
-               phone,
-               email,
-               head_img,
-               is_lock,
-               sr.role_id,
-               role_name,
-               role,
-               role_ico,
-               sp.per_id,
-               per,
-               menu_name,
-               menu_type,
-               menu_ico,
-               menu_sort,
-               parent_id
+        username,
+        password,
+        real_name,
+        phone,
+        email,
+        head_img,
+        is_lock,
+        sr.role_id,
+        role_name,
+        role,
+        role_ico,
+        sp.per_id,
+        per,
+        menu_name,
+        menu_type,
+        menu_ico,
+        menu_sort,
+        parent_id
         from sys_user su
-                 inner join sys_user_role sur on su.user_id = sur.user_id
-                 inner join sys_role sr on sur.role_id = sr.role_id
-                 inner join sys_role_per srp on sr.role_id = srp.role_id
-                 inner join sys_per sp on srp.per_id = sp.per_id
-        where su.user_id = #{userId}
+        inner join sys_user_role sur on su.user_id = sur.user_id
+        inner join sys_role sr on sur.role_id = sr.role_id
+        inner join sys_role_per srp on sr.role_id = srp.role_id
+        inner join sys_per sp on srp.per_id = sp.per_id
+        <where>
+            <if test="userId != null">
+                and su.user_id = #{userId}
+            </if>
+            <if test="username != null and username != ''">
+                and su.username = #{username}
+            </if>
+        </where>
 
     </select>
+
+
 </mapper>

@@ -23,7 +23,7 @@ public class SysRoleDTO implements Serializable {
     @ApiModelProperty(value = "角色名")
     private String roleName;
     @ApiModelProperty(value = "角色")
-    private Integer role;
+    private String role;
     @ApiModelProperty(value = "图标")
     private String roleIco;
     @ApiModelProperty(value = "角色创建时间")

@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author lhf
  * @since 2020/9/15 16:16
  */
-@FeignClient("sys-user-service")
-@RequestMapping("client")
+@FeignClient(value = "sys-user-service",contextId = "clientFeign")
 public interface ClientFeign {
 
     /**
@@ -22,7 +21,8 @@ public interface ClientFeign {
      * @param clientId
      * @return
      */
-    @GetMapping("/queryById/{clientId}")
+    @GetMapping("/client/queryById/{clientId}")
     ClientDetailsDTO queryByClientId(@PathVariable String clientId);
+
 
 }
