@@ -27,10 +27,10 @@ spring:
 
       max-active: 5
       max-create-task-count: 10
-      max-evictable-idle-time-millis: 30000
+      max-evictable-idle-time-millis: 60000
       min-evictable-idle-time-millis: 30000
       max-wait: 10000
-      min-idle: 0
+      min-idle: 1
       max-wait-thread-count: 8
       web-stat-filter:
         enabled: true

@@ -7,3 +7,8 @@ spring:
       discovery:
         group: SYSTEM
         server-addr: 192.168.157.131:8848
+
+#feign:
+#  httpclient:
+#    time-to-live: 3000
+#    connection-timeout: 5000

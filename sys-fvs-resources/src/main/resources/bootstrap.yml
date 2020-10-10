@@ -1,13 +1,11 @@
 spring:
   application:
-    name: sys-user-api
-
+    name: sys-fvs-resource
   cloud:
     nacos:
       discovery:
-        log-name: user.log
         server-addr: 192.168.157.131:8848
         group: SYSTEM
-        heart-beat-timeout: 30000
-
-
+      config:
+        server-addr: 192.168.157.131:8848
+        timeout: 5000

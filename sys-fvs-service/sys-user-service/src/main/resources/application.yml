@@ -11,13 +11,27 @@ mybatis-plus:
   mapper-locations: mapper/*.xml
 feign:
   httpclient:
-    connection-timeout: 30000
-    time-to-live: 10000
+    connection-timeout: 3000
+    time-to-live: 3000
+    connection-timer-repeat: 3000
   compression:
     response:
       enabled: true
+      useGzipDecoder: true
     request:
       enabled: true
+  hystrix:
+    enabled: true
+  okhttp:
+    enabled: true
+  client:
+    default-to-properties: true
+    default-config: default
+    config:
+      default:
+        read-timeout: 40000
+        connect-timeout: 40000
+
 #hystrix:
 #  command:
 #    default:
@@ -28,6 +42,5 @@ feign:
 #      circuitBreaker:
 #        sleepWindowInMilliseconds: 300000
 #        forceClosed: true
-
 
 

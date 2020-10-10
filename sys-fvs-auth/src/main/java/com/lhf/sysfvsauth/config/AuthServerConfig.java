@@ -1,5 +1,6 @@
 package com.lhf.sysfvsauth.config;
 
+import com.lhf.sysfvsauth.config.jwt.FvsJwt;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -13,11 +14,15 @@ import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.code.AuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.code.InMemoryAuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeServices;
-import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.*;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
+import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * <p></p>
@@ -54,6 +59,7 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         security.checkTokenAccess("permitAll()")
+                .tokenKeyAccess("permitAll()")
                 .allowFormAuthenticationForClients();
     }
 
@@ -87,26 +93,37 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.authorizationCodeServices(authorizationCodeServices())
-//                .tokenServices(tokenServices())
+                .tokenServices(tokenServices())
         ;
     }
 
     @Bean
     public TokenStore tokenStore() {
-        return new RedisTokenStore(redisConnectionFactory);
+        return new JwtTokenStore(new JwtAccessTokenConverter());
+//        return new RedisTokenStore(redisConnectionFactory);
     }
 
+    @Bean
+    public JwtAccessTokenConverter tokenConverter() {
+        FvsJwt converter = new FvsJwt();
+        converter.setSigningKey("fvs");
+//        converter.setVerifierKey("lhf");
+        return converter;
+    }
 
-//    @Bean
-//    public AuthorizationServerTokenServices tokenServices() {
-//        DefaultTokenServices tokenServices = new DefaultTokenServices();
-//        tokenServices.setTokenStore(tokenStore());
-//        tokenServices.setClientDetailsService(clientDetailsService);
-//        tokenServices.setRefreshTokenValiditySeconds(60 * 30);
-//        tokenServices.setReuseRefreshToken(true);
-//        tokenServices.setSupportRefreshToken(true);
-//        return tokenServices;
-//    }
+    @Bean
+    public AuthorizationServerTokenServices tokenServices() {
+        DefaultTokenServices tokenServices = new DefaultTokenServices();
+        tokenServices.setTokenStore(tokenStore());
+        tokenServices.setClientDetailsService(clientDetailsService);
+        tokenServices.setRefreshTokenValiditySeconds(60 * 30);
+        tokenServices.setReuseRefreshToken(true);
+        tokenServices.setSupportRefreshToken(true);
+        TokenEnhancerChain enhancer = new TokenEnhancerChain();
+        enhancer.setTokenEnhancers(Collections.singletonList(tokenConverter()));
+        tokenServices.setTokenEnhancer(enhancer);
+        return tokenServices;
+    }
 
     @Bean
     public AuthorizationCodeServices authorizationCodeServices() {

@@ -2,6 +2,8 @@ package com.lhf.sysfvsuserapi.feign;
 
 import com.lhf.sysfvscommon.dto.ClientDetailsDTO;
 import com.lhf.sysfvscommon.entity.ClientDetails;
+import com.lhf.sysfvsuserapi.feign.fallback.ClientDetailsFallback;
+import com.lhf.sysfvsuserapi.feign.fallback.SysPerFallback;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
  * @author lhf
  * @since 2020/9/15 17:01
  */
-@FeignClient(value = "sys-user-service",contextId = "clientDetailsFeign")
+@FeignClient(value = "sys-user-service", contextId = "clientDetailsFeign")
 public interface ClientDetailsFeign {
 
     /**

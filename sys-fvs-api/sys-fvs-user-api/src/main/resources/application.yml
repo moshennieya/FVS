@@ -13,17 +13,34 @@ spring:
         max-wait: 24000
 feign:
   httpclient:
-    connection-timeout: 30000
-    time-to-live: 5000
-#    connection-timer-repeat: 30000
+    connection-timeout: 6000
+    time-to-live: 6000
+    connection-timer-repeat: 6000
 #    time-to-live-unit: minutes
 #    disable-ssl-validation: true
   compression:
     response:
       enabled: true
+      useGzipDecoder: true
     request:
       enabled: true
+      min-request-size: 2048
+  hystrix:
+    enabled: true
+  okhttp:
+    enabled: true
   client:
+    default-to-properties: true
+    default-config: default
     config:
       default:
-        read-timeout: 10000
+        read-timeout: 50000
+        connect-timeout: 50000
+ribbon:
+  eager-load:
+    enabled: true
+    clients: sys-user-service
+
+
+
+#        forceClosed: true

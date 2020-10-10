@@ -23,4 +23,22 @@ spring:
     username: root
     password: lhfadmin
 
+ribbon:
+  eager-load:
+    enabled: true
+    clients: sys-user-service
+feign:
+  client:
+    default-to-properties: true
+    default-config: default
+    config:
+      default:
+        connect-timeout: 6000
+        read-timeout: 6000
+#  hystrix:
+#    enabled: true
+  httpclient:
+    connection-timeout: 6000
+    time-to-live: 6000
+    connection-timer-repeat: 6000
 

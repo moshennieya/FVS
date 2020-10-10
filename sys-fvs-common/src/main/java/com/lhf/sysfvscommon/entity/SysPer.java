@@ -32,4 +32,13 @@ public class SysPer implements Serializable {
     private Integer parentId;
 
 
+    public SysPer() {
+    }
+
+    public SysPer(String per, String menuName, Integer menuType, Integer parentId) {
+        this.per = per;
+        this.menuName = menuName;
+        this.menuType = menuType;
+        this.parentId = parentId;
+    }
 }

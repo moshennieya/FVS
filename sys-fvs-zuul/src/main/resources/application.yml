@@ -6,11 +6,17 @@ zuul:
   sensitive-headers:  Access-Control-Allow-Origin
   ignored-headers: Access-Control-Allow-Origin,H-APP-Id,Token,APPToken
   host:
-    connect-timeout-millis: 3000
-    time-to-live: 30000
-    connection-request-timeout-millis: 50000
+    connect-timeout-millis: 8000
+    time-to-live: 8000
+    connection-request-timeout-millis: 8000
     max-total-connections: 100
-    socket-timeout-millis: 50000
+    socket-timeout-millis: 8000
+  ribbon-isolation-strategy: thread
+  thread-pool:
+    use-separate-thread-pools: true
+  ribbon:
+    eager-load:
+      enabled: true
   prefix: /api
   routes:
     oauth-authorize:
@@ -19,6 +25,5 @@ zuul:
     sys-user:
       path: /user/**
       service-id: sys-user-api
-
 
 

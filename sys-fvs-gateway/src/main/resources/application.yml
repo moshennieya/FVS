@@ -1,4 +1,25 @@
 server:
   port: 8002
-
-
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        opaquetoken:
+          client-id: e5170418-8560-460b-9296-d7bd95a06a5e
+          client-secret: 123
+      client:
+        provider:
+          uua:
+            authorization-uri: http://localhost:8001/oauth/authorize
+            token-uri: http://localhost:8001/oauth/token
+            user-info-uri: http://localhost:8001/
+            jwk-set-uri: http://localhost:8001/uaa/token_keys
+        registration:
+          client-login:
+            provider: uua
+            client-id: e5170418-8560-460b-9296-d7bd95a06a5e
+            client-secret: 123
+            authorization-grant-type: authorization_code
+#            redirect-uri-template: "{baseUrl}/login/oauth2/code/{registrationId}"
+            redirect-uri: http://192.168.157.131/security
+            scope: all

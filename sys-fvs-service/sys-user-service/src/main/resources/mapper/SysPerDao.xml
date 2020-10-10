@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lhf.sysuserservice.dao.SysPerDao">
+
+    <select id="queryAny" resultType="com.lhf.sysfvscommon.dto.SysPerDTO">
+        select sp.per_id, per, menu_name, menu_type, menu_ico, menu_sort, parent_id from sys_per as sp
+        <where>
+            <if test="menuName != null and menuName != ''">
+                and sp.menu_name=#{menuName}
+            </if>
+            <if test="menuType != null">
+                and sp.menu_type=#{menuType}
+            </if>
+            <if test="parentId != null">
+                and sp.parent_id=#{parentId}
+            </if>
+            <if test="per != null">
+                and sp.per = #{per}
+            </if>
+        </where>
+    </select>
+</mapper>

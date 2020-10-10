@@ -38,6 +38,7 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     public boolean update(SysUser params) {
+
         Assert.isNull(params.getUserId(), "用户id不能为空");
         return this.sysUserDao.updateById(params) > 0;
     }
@@ -51,4 +52,5 @@ public class SysUserServiceImpl implements SysUserService {
     public SysUserDTO queryByUsername(String username) {
         return this.sysUserDao.queryAnyByUserIdOrUsername(null, username);
     }
+
 }

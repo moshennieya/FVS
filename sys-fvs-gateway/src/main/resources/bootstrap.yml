@@ -5,4 +5,19 @@ spring:
     nacos:
       discovery:
         server-addr: 192.168.157.131:8848
-        group: GATEWAY
+        group: SYSTEM
+    gateway:
+
+      #      路由，网关
+      routes:
+        - id: sys-user-api
+          uri:  http://localhost:7000
+          predicates:
+            #            - Method=GET,POST,PUT,DELETE
+            - Path=/per/{segment}
+        - id: test
+          uri: http://localhost:8100
+          predicates:
+            - Method=GET
+            - Path=/test/{segment}
+

@@ -1,15 +1,14 @@
-package com.lhf.sysfvszuul.config;
+package com.lhf.sysfvsresources.config;
 
-import com.lhf.sysfvszuul.config.jwt.FvsJwt;
-import com.lhf.sysfvszuul.handler.OauthAccessDeniedHandler;
-import com.lhf.sysfvszuul.handler.OauthAuthenticationEntryPoint;
+import com.lhf.sysfvsresources.config.handler.OauthAccessDeniedHandler;
+import com.lhf.sysfvsresources.config.handler.OauthAuthenticationEntryPoint;
+import com.lhf.sysfvsresources.config.jwt.FvsJwt;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
@@ -18,11 +17,12 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
  * <p></p>
  *
  * @author lhf
- * @since 2020/9/12 14:50
+ * @since 2020/10/9 20:29
  */
-@Configuration
 @EnableResourceServer
-public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
+@Configuration
+public class ResourcesConfig extends ResourceServerConfigurerAdapter {
+
     @Bean
     public JwtAccessTokenConverter tokenConverter() {
         FvsJwt converter = new FvsJwt();
@@ -50,19 +50,11 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
         http.authorizeRequests()
 //                .antMatchers("/api/auth/oauth/**").permitAll()
+                .antMatchers("/test").hasRole("ROOT")
                 .anyRequest().authenticated()
                 .and()
                 .csrf()
                 .disable()
                 .cors();
     }
-
-//    @Bean
-//    public RemoteTokenServices tokenServices() {
-//        RemoteTokenServices tokenServices = new RemoteTokenServices();
-//        tokenServices.setClientId("e5170418-8560-460b-9296-d7bd95a06a5e");
-//        tokenServices.setClientSecret("123");
-//        tokenServices.setCheckTokenEndpointUrl("http://localhost:8001/oauth/check_token");
-//        return tokenServices;
-//    }
 }
