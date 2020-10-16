@@ -25,6 +25,8 @@
             <groupId>com.lhf</groupId>
             <artifactId>sys-fvs-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+            <type>jar</type>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -13,7 +13,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>sys-fvs-common</name>
     <description>后台公共模块</description>
-
+<!--    <packaging>jar</packaging>-->
     <properties>
         <java.version>1.8</java.version>
     </properties>
@@ -65,13 +65,13 @@
         </dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
+<!--    <build>-->
+<!--        <plugins>-->
+<!--            <plugin>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--            </plugin>-->
+<!--        </plugins>-->
+<!--    </build>-->
 
 </project>

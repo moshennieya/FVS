@@ -1,25 +1,24 @@
 server:
-  port: 8002
+#  port: 8002
+  port: 80
+  forward-headers-strategy: native
 spring:
   security:
     oauth2:
-      resourceserver:
-        opaquetoken:
-          client-id: e5170418-8560-460b-9296-d7bd95a06a5e
-          client-secret: 123
       client:
         provider:
-          uua:
-            authorization-uri: http://localhost:8001/oauth/authorize
-            token-uri: http://localhost:8001/oauth/token
-            user-info-uri: http://localhost:8001/
-            jwk-set-uri: http://localhost:8001/uaa/token_keys
+          uaa:
+            authorization-uri: http://192.168.157.131/oauth/authorize
+            token-uri: http://192.168.157.131/oauth/token
+            user-info-uri: http://192.168.157.131/userinfo
+            jwk-set-uri: http://192.168.157.131/token_keys
         registration:
-          client-login:
-            provider: uua
+          uaa:
+#            provider: uaa
             client-id: e5170418-8560-460b-9296-d7bd95a06a5e
             client-secret: 123
             authorization-grant-type: authorization_code
 #            redirect-uri-template: "{baseUrl}/login/oauth2/code/{registrationId}"
-            redirect-uri: http://192.168.157.131/security
+#            redirect-uri: http://localhost:8080/security
+            redirect-uri: http://localhost/login/oauth2/code/uaa
             scope: all

@@ -2,12 +2,16 @@ spring:
   application:
     name: sys-fvs-gateway
   cloud:
-    nacos:
-      discovery:
-        server-addr: 192.168.157.131:8848
-        group: SYSTEM
     gateway:
-
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowed-origins: "*"
+            allowed-methods: "*"
+            allow-credentials: "true"
+      httpclient:
+        connect-timeout: 60
+        response-timeout: 6s
       #      路由，网关
       routes:
         - id: sys-user-api
@@ -20,4 +24,7 @@ spring:
           predicates:
             - Method=GET
             - Path=/test/{segment}
+
+      
+
 
