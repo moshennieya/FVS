@@ -1,5 +1,6 @@
 package com.lhf.sysfvsauth.config;
 
+import com.lhf.sysfvsauth.config.handler.SuccessHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -82,8 +83,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .csrf().disable()
-//                .sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.NEVER)
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.NEVER)
         ;
 //        http.headers().frameOptions().sameOrigin().httpStrictTransportSecurity().disable();
     }

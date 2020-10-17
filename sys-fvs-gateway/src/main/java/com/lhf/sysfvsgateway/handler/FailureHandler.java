@@ -10,6 +10,9 @@ import org.springframework.security.web.server.WebFilterExchange;
 import org.springframework.security.web.server.authentication.ServerAuthenticationFailureHandler;
 import reactor.core.publisher.Mono;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
+
 /**
  * <p></p>
  *
@@ -24,7 +27,8 @@ public class FailureHandler implements ServerAuthenticationFailureHandler {
         logger.error("登录失败:::::::::{}", exception.getMessage());
         ServerHttpResponse response = exchange.getExchange().getResponse();
         DataBufferFactory bufferFactory = response.bufferFactory();
-        DataBuffer wrap = bufferFactory.wrap("登录失败".getBytes());
+        DataBuffer wrap = null;
+        wrap = bufferFactory.wrap("登录失败".getBytes(StandardCharsets.UTF_8));
         return response.writeWith(Mono.just(wrap));
     }
 }

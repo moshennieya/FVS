@@ -1,9 +1,6 @@
 package com.lhf.sysfvsgateway.config;
 
-import com.lhf.sysfvsgateway.handler.AccessDeniedHandler;
 import com.lhf.sysfvsgateway.handler.FailureHandler;
-import com.lhf.sysfvsgateway.handler.SuccessHandler;
-import com.lhf.sysfvsgateway.handler.UnLoginHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
@@ -17,7 +14,6 @@ import org.springframework.security.web.server.csrf.CookieServerCsrfTokenReposit
  * @since 2020/10/14 16:16
  */
 @Configuration
-
 public class SecurityConfig {
 
     @Bean
@@ -29,10 +25,10 @@ public class SecurityConfig {
                 .csrf(csrfSpec -> csrfSpec.csrfTokenRepository(CookieServerCsrfTokenRepository.withHttpOnlyFalse()))
                 .cors()
                 .and()
-                .oauth2Login()
-                .and()
-                .oauth2Client()
-                .and()
+                .oauth2Login(oauth -> {
+                    oauth.authenticationFailureHandler(new FailureHandler())
+                    ;
+                })
         ;
         return http.build();
     }

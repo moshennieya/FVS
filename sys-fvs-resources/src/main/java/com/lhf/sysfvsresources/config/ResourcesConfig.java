@@ -42,6 +42,7 @@ public class ResourcesConfig extends ResourceServerConfigurerAdapter {
                 .accessDeniedHandler(new OauthAccessDeniedHandler())
 //                .tokenServices(tokenServices())
                 .tokenStore(tokenStore(tokenConverter()))
+                .stateless(false)
         ;
     }
 

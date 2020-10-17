@@ -52,6 +52,32 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-oauth2</artifactId>
         </dependency>
+
+<!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.apache.oltu.oauth2/org.apache.oltu.oauth2.common &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.oltu.oauth2</groupId>-->
+<!--            <artifactId>org.apache.oltu.oauth2.common</artifactId>-->
+<!--            <version>1.0.2</version>-->
+<!--        </dependency>-->
+
+<!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.apache.oltu.oauth2/org.apache.oltu.oauth2.authzserver &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.oltu.oauth2</groupId>-->
+<!--            <artifactId>org.apache.oltu.oauth2.authzserver</artifactId>-->
+<!--            <version>1.0.2</version>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>org.apache.oltu.oauth2</groupId>-->
+<!--            <artifactId>org.apache.oltu.oauth2.client</artifactId>-->
+<!--            <version>${oltu.version}</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.oltu.oauth2</groupId>-->
+<!--            <artifactId>org.apache.oltu.oauth2.resourceserver</artifactId>-->
+<!--            <version>${oltu.version}</version>-->
+<!--        </dependency>-->
+
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
